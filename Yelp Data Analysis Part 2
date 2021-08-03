@@ -1,0 +1,13 @@
+Comparing the restaurants with 2-3 stars to the restaurants with 4-5 stars in Phoenix. Finding the relationship between star rating and the restaurant hours of operation, 
+number of reviews, locations.
+
+
+Different distribution of hours: 
+
+SELECT b.name, b.city,
+       c.category, b.stars,
+       h.hours
+from (business b Inner join category c on b.id = c.business_id) 
+     Inner join hours h on c.business_id = h.business_id
+where c.category = 'Restaurants' and b.city = 'Phoenix'
+Group by b.stars;
