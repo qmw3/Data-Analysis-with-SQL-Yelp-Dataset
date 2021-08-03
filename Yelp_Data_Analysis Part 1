@@ -1,0 +1,148 @@
+Q: List the cities with the most reviews in descending order:
+
+
+SELECT City,
+      sum(review_count) AS Reviews
+FROM Business
+GROUP BY city
+Order BY Reviews DESC;
+	
+	
+Result: 
+
+city            | Reviews |
++-----------------+---------+
+| Las Vegas       |   82854 |
+| Phoenix         |   34503 |
+| Toronto         |   24113 |
+| Scottsdale      |   20614 |
+| Charlotte       |   12523 |
+| Henderson       |   10871 |
+| Tempe           |   10504 |
+| Pittsburgh      |    9798 |
+| Montréal        |    9448 |
+| Chandler        |    8112 |
+| Mesa            |    6875 |
+| Gilbert         |    6380 |
+| Cleveland       |    5593 |
+| Madison         |    5265 |
+| Glendale        |    4406 |
+| Mississauga     |    3814 |
+| Edinburgh       |    2792 |
+| Peoria          |    2624 |
+| North Las Vegas |    2438 |
+| Markham         |    2352 |
+| Champaign       |    2029 |
+| Stuttgart       |    1849 |
+| Surprise        |    1520 |
+| Lakewood        |    1465 |
+| Goodyear        |    1155 
+(Output limit exceeded, 25 of 362 total rows shown)
+
+
+Q: Find the top 3 users based on their total number of reviews:
+		
+	
+SELECT id,
+       name,
+       review_count
+FROM user
+ORDER BY review_count DESC
+LIMIT 3;
+
+		
+Result:
+
++------------------------+--------+--------------+
+| id                     | name   | review_count |
++------------------------+--------+--------------+
+| -G7Zkl1wIWBBmD0KRy_sCw | Gerald |         2000 |
+| -3s52C4zL_DHRK0ULG6qtg | Sara   |         1629 |
+| -8lbUNlXVSoXqaRRiHiSNg | Yuri   |         1339 |
++------------------------+--------+--------------+
+
+
+
+Q: Does posing more reviews correlate with more fans?
+
+
+SELECT id,
+       name,
+       review_count,
+       fans
+FROM user
+ORDER BY fans DESC
+LIMIT 7;
+
+
+Result: 
++------------------------+-----------+--------------+------+
+| id                     | name      | review_count | fans |
++------------------------+-----------+--------------+------+
+| -9I98YbNQnLdAmcYfb324Q | Amy       |          609 |  503 |
+| -8EnCioUmDygAbsYZmTeRQ | Mimi      |          968 |  497 |
+| --2vR0DIsmQ6WfcSzKWigw | Harald    |         1153 |  311 |
+| -G7Zkl1wIWBBmD0KRy_sCw | Gerald    |         2000 |  253 |
+| -0IiMAZI2SsQ7VmyzJjokQ | Christine |          930 |  173 |
+| -g3XIcCb2b-BD0QBCcq2Sw | Lisa      |          813 |  159 |
+| -9bbDysuiWeo2VShFJJtcw | Cat       |          377 |  133 |
++------------------------+-----------+--------------+------+
+
+No, posing more reviews does not necessarily correlate with more fans. 
+For example, Amy and Mimi. Amy has the most fans (503), but she has posted fewer reviews (609) than Mini has posted (968). 
+
+
+
+Q: Are there more reviews with the word "love" or with the word "hate" in them?
+
+
+select (select count(text)
+from review
+where text like "%love%") as  love_text, 
+(select count(text) 
+from review
+where text like "%hate%") as hate_text;
+
+
+Result:
++-----------+-----------+
+| love_text | hate_text |
++-----------+-----------+
+|      1780 |       232 |
++-----------+-----------+
+
+There are more reviews with the word “love” than the word “hate”. 
+
+
+
+Q: Find the top 10 users with the most fans:
+
+
+SELECT Name,
+	fans
+	FROM user
+	ORDER BY fans DESC
+	limit 10;
+
+
+Result:
++-----------+------+
+| name      | fans |
++-----------+------+
+| Amy       |  503 |
+| Mimi      |  497 |
+| Harald    |  311 |
+| Gerald    |  253 |
+| Christine |  173 |
+| Lisa      |  159 |
+| Cat       |  133 |
+| William   |  126 |
+| Fran      |  124 |
+| Lissa     |  120 |
++-----------+------+
+
+
+
+
+
+
