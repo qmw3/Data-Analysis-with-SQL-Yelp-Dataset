@@ -4,6 +4,7 @@ number of reviews, locations.
 
 Different distribution of hours: 
 
+```ruby
 SELECT b.name, b.city,
        c.category, b.stars,
        h.hours
@@ -11,8 +12,4 @@ from (business b Inner join category c on b.id = c.business_id)
      Inner join hours h on c.business_id = h.business_id
 where c.category = 'Restaurants' and b.city = 'Phoenix'
 Group by b.stars;
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
 ```
