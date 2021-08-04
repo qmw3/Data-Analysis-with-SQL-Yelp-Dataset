@@ -1,14 +1,32 @@
-Comparing the restaurants with 2-3 stars to the restaurants with 4-5 stars in Phoenix. Finding the relationship between star rating and the restaurant hours of operation, 
-number of reviews, locations.
+Comparing the restaurants with 2-3 stars to the restaurants with 4-5 stars in Phoenix. 
 
+SQL code used for analysis:
 
-Different distribution of hours: 
-
-
-SELECT b.name, b.city,
+```ruby
+SELECT b.name,
+       b.city,
        c.category, b.stars,
-       h.hours
-from (business b Inner join category c on b.id = c.business_id) 
-     Inner join hours h on c.business_id = h.business_id
-where c.category = 'Restaurants' and b.city = 'Phoenix'
+       h.hours,
+       b.review_count as reviews,     
+CASE 
+     WHEN stars BETWEEN 2 AND 3 THEN '2-3 stars'
+     WHEN stars BETWEEN 4 AND 5 THEN '4-5 stars'
+END AS rating
+     From business b
+     Inner join hours h on b.id = h.business_id
+     Inner join category c on c.business_id = b.id
+     Where city = 'Phoenix' and category = 'Restaurants' and rating in ('2-3 stars','4-5 stars')
+     Group By NAME
+     Order By stars DESC
+```
+
+Output:
++----------------------------------------+---------+-------------+-------+----------------------+-----------+---------+
+| name                                   | city    | category    | stars | hours                | rating    | reviews |
++----------------------------------------+---------+-------------+-------+----------------------+-----------+---------+
+| Charlie D's Catfish & Chicken          | Phoenix | Restaurants |   4.5 | Saturday|11:00-18:00 | 4-5 stars |       7 |
+| Bootleggers Modern American Smokehouse | Phoenix | Restaurants |   4.0 | Saturday|11:00-22:00 | 4-5 stars |     431 |
+| Gallagher's                            | Phoenix | Restaurants |   3.0 | Saturday|9:00-2:00   | 2-3 stars |      60 |
+| McDonald's                             | Phoenix | Restaurants |   2.0 | Saturday|5:00-0:00   | 2-3 stars |       8 |
++----------------------------------------+---------+-------------+-------+----------------------+-----------+---------+
 
