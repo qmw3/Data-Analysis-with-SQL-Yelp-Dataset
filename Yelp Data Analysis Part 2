@@ -2,7 +2,7 @@ Comparing the restaurants with 2-3 stars to the restaurants with 4-5 stars in Ph
 
 SQL code used for analysis:
 
-```ruby
+```
 SELECT b.name,
        b.city,
        c.category, b.stars,
@@ -29,4 +29,5 @@ Output:
 | Gallagher's                            | Phoenix | Restaurants |   3.0 | Saturday|9:00-2:00   | 2-3 stars |      60 |
 | McDonald's                             | Phoenix | Restaurants |   2.0 | Saturday|5:00-0:00   | 2-3 stars |       8 |
 +----------------------------------------+---------+-------------+-------+----------------------+-----------+---------+
+
 
