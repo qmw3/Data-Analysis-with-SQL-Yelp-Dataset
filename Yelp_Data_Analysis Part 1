@@ -1,14 +1,14 @@
 Q: List the cities with the most reviews in descending order:
 
-
+```
 SELECT City,
       sum(review_count) AS Reviews
 FROM Business
 GROUP BY city
 Order BY Reviews DESC;
+```	
 	
-	
-Result: 
+Output: 
 
 city            | Reviews |
 +-----------------+---------+
@@ -40,18 +40,19 @@ city            | Reviews |
 (Output limit exceeded, 25 of 362 total rows shown)
 
 
+
 Q: Find the top 3 users based on their total number of reviews:
 		
-	
+```	
 SELECT id,
        name,
        review_count
 FROM user
 ORDER BY review_count DESC
 LIMIT 3;
-
+```
 		
-Result:
+Output:
 
 +------------------------+--------+--------------+
 | id                     | name   | review_count |
@@ -65,7 +66,7 @@ Result:
 
 Q: Does posing more reviews correlate with more fans?
 
-
+```
 SELECT id,
        name,
        review_count,
@@ -73,9 +74,9 @@ SELECT id,
 FROM user
 ORDER BY fans DESC
 LIMIT 7;
+```
 
-
-Result: 
+Output: 
 +------------------------+-----------+--------------+------+
 | id                     | name      | review_count | fans |
 +------------------------+-----------+--------------+------+
@@ -88,6 +89,7 @@ Result:
 | -9bbDysuiWeo2VShFJJtcw | Cat       |          377 |  133 |
 +------------------------+-----------+--------------+------+
 
+Finding: 
 No, posing more reviews does not necessarily correlate with more fans. 
 For example, Amy and Mimi. Amy has the most fans (503), but she has posted fewer reviews (609) than Mini has posted (968). 
 
@@ -95,35 +97,36 @@ For example, Amy and Mimi. Amy has the most fans (503), but she has posted fewer
 
 Q: Are there more reviews with the word "love" or with the word "hate" in them?
 
-
+```
 select (select count(text)
-from review
-where text like "%love%") as  love_text, 
-(select count(text) 
-from review
-where text like "%hate%") as hate_text;
+	from review
+	where text like "%love%") as  love_text, 
+	(select count(text) 
+	from review
+	where text like "%hate%") as hate_text;
+```
 
-
-Result:
+Output:
 +-----------+-----------+
 | love_text | hate_text |
 +-----------+-----------+
 |      1780 |       232 |
 +-----------+-----------+
 
+Finding: 
 There are more reviews with the word “love” than the word “hate”. 
 
 
 
 Q: Find the top 10 users with the most fans:
 
-
+```
 SELECT Name,
 	fans
 	FROM user
 	ORDER BY fans DESC
 	limit 10;
-
+```
 
 Result:
 +-----------+------+
